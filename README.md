@@ -1,111 +1,74 @@
-# Energy Dashboard
+Energy Dashboard ⚡
+A smart battery controller dashboard for real-time energy management in Groningen, NL. It visualizes electricity prices and solar radiation forecasts to provide automated CHARGE / DISCHARGE / HOLD decisions.
 
-Smart battery controller dashboard for real-time energy management in Groningen, NL. Displays charge/discharge decisions based on electricity prices and solar radiation forecasts.
+🚀 Live Demo
+https://gabemaldito.github.io/energy-dashboard/
 
-## Features
+<p align="center">
+  <img src="gifts.gif" alt="Energy Dashboard Animation" width="700">
+</p>
 
-- **Verdict Card** — Real-time CHARGE / DISCHARGE / HOLD decision with context
-- **Price Chart** — Hourly electricity price forecast (€/MWh) with highlighted current, cheapest, and most expensive hours
-- **Solar Chart** — Solar radiation forecast (W/m²) for the upcoming hours
-- **Status Footer** — Online/offline indicator, last update timestamp, and API docs link
-- **Auto-polling** — Data refreshes every 5 minutes
-- **Error handling** — Graceful error state with retry button
 
-## Tech Stack
+🛠️ Tech Stack
+Frontend: React 19, TypeScript, Vite 8, Tailwind CSS 4.
 
-- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- [Vite 8](https://vite.dev/)
-- [Tailwind CSS 4](https://tailwindcss.com/)
-- [Recharts 3](https://recharts.org/) — Charts library
-- [OxLint](https://oxc.rs/docs/guide/usage/linter) — Linter
+Charts: Recharts 3.
 
-## Getting Started
+Backend: FastAPI (Python), hosted on Railway.
 
-### Prerequisites
+Linting: OxLint.
 
-- Node.js 18+
-- A running backend API (see [API](#api) below)
+✨ Features
+Verdict Card — Real-time decision making based on current price and solar irradiance.
 
-### Installation
+Dynamic Charts — Interactive visualizations for electricity price (€/MWh) and solar radiation (W/m²).
 
-```bash
-git clone https://github.com/<your-user>/energy-dashboard.git
+Live Status — Backend health monitoring with auto-refresh every 5 minutes.
+
+Robust UI — Graceful error handling and loading states.
+
+⚙️ Development
+Prerequisites
+Node.js 18+
+
+A running backend API.
+
+Installation
+Bash
+git clone https://github.com/gabemaldito/energy-dashboard.git
 cd energy-dashboard
 npm install
-```
+Environment Variables
+Create a .env.local file in the root:
 
-### Environment Variables
-
-Create a `.env.local` file in the project root:
-
-```
+Snippet de código
 VITE_API_BASE_URL=http://localhost:8000
-```
+Commands
+npm run dev — Start development server.
 
-Or point to the production backend:
+npm run build — Build for production.
 
-```
-VITE_API_BASE_URL=https://battery-brain-production.up.railway.app
-```
+npm run lint — Run OxLint.
 
-### Development
-
-```bash
-npm run dev
-```
-
-### Build
-
-```bash
-npm run build
-```
-
-### Preview
-
-```bash
-npm run preview
-```
-
-### Lint
-
-```bash
-npm run lint
-```
-
-## Project Structure
-
-```
+🏗️ Project Structure
+Plaintext
 src/
-  api/
-    client.ts          # API client with timeout and abort controller
-    types.ts           # TypeScript interfaces for API responses
-  components/
-    VerdictCard.tsx    # CHARGE/DISCHARGE/HOLD decision card
-    PriceChart.tsx     # Bar chart for electricity prices
-    SolarChart.tsx     # Area chart for solar radiation
-    StatusFooter.tsx   # Online status and last update
-    ErrorState.tsx     # Error display with retry
-    LoadingSkeleton.tsx # Loading placeholder
-  App.tsx              # Main app with data fetching and polling
-  main.tsx             # React entry point
-  index.css            # Tailwind CSS import
-```
+├── api/          # API client and TypeScript interfaces
+├── components/   # Reusable UI components
+├── App.tsx       # Main state management and polling logic
+└── main.tsx      # React entry point
+🔌 API Integration
+The dashboard consumes the Smart Battery Controller API:
 
-## API
+Base URL (Production): https://battery-brain-production.up.railway.app
 
-The dashboard consumes a REST API with the following endpoints:
+Key Endpoints:
 
-| Endpoint              | Method | Description                          |
-| --------------------- | ------ | ------------------------------------ |
-| `/health`             | GET    | Health check (status, version, time) |
-| `/api/v1/decision`    | GET    | Battery decision + price forecast    |
-| `/api/v1/forecast`    | GET    | Solar radiation forecast             |
-| `/docs`               | GET    | API documentation (Swagger/ReDoc)    |
+/api/v1/decision — Battery action and price forecast.
 
-**Default base URL:** `http://localhost:8000`
+/api/v1/forecast — Solar radiation data.
 
-**Production:** `https://battery-brain-production.up.railway.app`
+/health — Service availability check.
 
-## License
-
-MIT
+🤝 Author
+Developed by Gabriel Rapha Costa Cardoso.
